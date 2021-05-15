@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <style>
+
+        body{
+            background-color: #e7e7e7;
+        }
+        
+        #bolaLegal{
+            text-align: center;
+            border-radius: 90%;
+            margin: auto;
+            width:500px;
+            height:500px;
+            background: radial-gradient(circle at 120px 100px, gray, black);
+            
+        }
+
+        p{
+            text-align:center;
+            padding-top: 40%;
+        }
+
+        #bigTexto{
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+
+    </style>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Detector de idade </title>
+</head>
+    <body>
+        <div id ="bolaLegal">
+        
+            <p>
+                <label  for="name"></label>
+                <select onchange="inptGen(this)" name="gendr" id=gender required>
+                    <option value= >Genero</option>                    
+                    <option value= 0>Mulher</option>
+                    <option value= 1>Homem</option>
+                </select>
+                
+            
+
+            <input onchange="inptData()" type="date" name="date" id="inptData" min="1900-07-02" max="2021-12-31">
+                <h1 id = "bigTexto">Informaçães, Por favor</h1>
+            </p>
+
+            
+
+        </div>
+
+
+    </body>
+</html>
+<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+
+<script>   
+    var info = ["",""];
+
+
+
+    function inptData(){        
+        let dataObj = new Date();
+        let dataRealAtual = dataObj.getFullYear();
+        let dataStr = document.getElementById("inptData").value;
+        for (i = 0; i < 2; i++){ dataStr = dataStr.replace("-","")}
+        info[0] = (dataRealAtual  - Number(dataStr.slice(0,4)));
+        display();
+                
+    }
+
+    function inptGen(genero) {
+        var genro = genero.options[genero.selectedIndex].value;
+        info[1] = genro
+        display();
+        
+  
+
+};
+
+    function imgGetter(){
+        genero = Number(info[1]), idade = info[0]
+        if(idade < 15){if(genero==1){return "url(https://static5.depositphotos.com/1005730/481/i/950/depositphotos_4814203-stock-photo-school-kid-with-backpack.jpg)"}else{return "url(https://st4.depositphotos.com/1023162/21240/i/1600/depositphotos_212403972-stock-photo-beautiful-girl-looking-sad-pouted.jpg)"}};
+        if(idade >= 15 && idade < 21){if(genero==1){return"url(https://www.thefamouspeople.com/profiles/images/thomas-brodie-sangster-4.jpg)"}else{return"url(https://editorial01.shutterstock.com/wm-preview-1500/5882072b/28741de7/icarly-2007-2012-shutterstock-editorial-5882072b.jpg)"}};
+        if(idade >= 21 && idade < 36){if(genero==1){return"url(https://st2.depositphotos.com/1011434/9384/i/600/depositphotos_93848114-stock-photo-man-working-with-a-tablet.jpg)"}else{return"url(https://st2.depositphotos.com/1010683/8994/i/950/depositphotos_89948244-stock-photo-caucasian-young-woman-in-red.jpg)"}};
+        if(idade >= 36 && idade < 90){if(genero==1){return"url(https://thumbs.dreamstime.com/z/smiling-old-man-having-coffee-portrait-looking-happy-33471677.jpg)"}else{return"url(https://st.depositphotos.com/1912933/1749/i/950/depositphotos_17491981-stock-photo-old-woman.jpg)"}
+        }else{if(genero==1){return"url(https://media.istockphoto.com/photos/old-russian-war-veteran-picture-id510536499)"}else{return"url(https://image.shutterstock.com/shutterstock/photos/191594678/imgGetter_1500/stock-photo-moscow-russia-may-a-war-veteran-woman-sits-on-a-bench-together-with-two-young-military-man-191594678.jpg)"}};
+            
+        
+        
+    }
+    function display(){
+        if ( !info.includes("")){
+            let id = document.getElementById("bolaLegal").style;
+            id.backgroundImage= imgGetter()
+        
+            id.backgroundPosition= "center"
+            id.backgroundRepeat = "no-repeat"
+            id.backgroundSize = "550px 560px"  
+            document.getElementById("bigTexto").remove()
+
+        }
+    }
+
+
+</script>
